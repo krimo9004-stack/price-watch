@@ -51,7 +51,7 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
   <input id="searchInput" placeholder="Search for any asset..." />
 </div>
 
-<!-- Grid containers for each tab -->
+<!-- Metals Tab -->
 <div id="metals" class="grid tab-content">
   <div class="chart-box" data-key="gold xau metal">
     <button class="fullscreen-btn">⛶</button>
@@ -61,29 +61,18 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:SILVER&interval=60&theme=Dark&style=1"></iframe>
   </div>
-  <div class="chart-box" data-key="platinum metal">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:PLATIN&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
 
+<!-- Energy Tab -->
 <div id="energy" class="grid tab-content" style="display:none;">
   <div class="chart-box" data-key="oil wti">
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark&style=1"></iframe>
   </div>
-  <div class="chart-box" data-key="brent oil">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:UKOIL&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="natural gas">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:NG1!&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
 
+<!-- Forex Tab -->
 <div id="forex" class="grid tab-content" style="display:none;">
-  <!-- معظم العملات العالمية -->
   <div class="chart-box" data-key="eur usd forex">
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=60&theme=Dark&style=1"></iframe>
@@ -92,23 +81,10 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:GBPUSD&interval=60&theme=Dark&style=1"></iframe>
   </div>
-  <div class="chart-box" data-key="usd jpy forex">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:USDJPY&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="aud usd forex">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:AUDUSD&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="cad usd forex">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:CADUSD&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <!-- يمكن إضافة المزيد من العملات بنفس الطريقة -->
 </div>
 
+<!-- Crypto Tab -->
 <div id="crypto" class="grid tab-content" style="display:none;">
-  <!-- أكثر العملات الرقمية شهرة -->
   <div class="chart-box" data-key="btc bitcoin crypto">
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=Dark&style=1"></iframe>
@@ -117,47 +93,21 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ETHUSDT&interval=60&theme=Dark&style=1"></iframe>
   </div>
-  <div class="chart-box" data-key="bnb crypto">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BNBUSDT&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="xrp crypto">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:XRPUSDT&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="ada crypto">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ADAUSDT&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
 
+<!-- Indices Tab -->
 <div id="indices" class="grid tab-content" style="display:none;">
   <div class="chart-box" data-key="sp500 index">
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark&style=1"></iframe>
   </div>
-  <div class="chart-box" data-key="nasdaq index">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ:NDX&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="dow jones index">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=DJ:DJI&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
 
+<!-- Commodities Tab -->
 <div id="commodities" class="grid tab-content" style="display:none;">
   <div class="chart-box" data-key="coffee commodity">
     <button class="fullscreen-btn">⛶</button>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:COFFEE&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="corn commodity">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:CORN&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="wheat commodity">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:WHEAT&interval=60&theme=Dark&style=1"></iframe>
   </div>
 </div>
 
@@ -171,30 +121,20 @@ document.querySelectorAll(".tab-btn").forEach(btn=>{
     document.querySelectorAll(".tab-content").forEach(tc=>{
       tc.style.display = (tc.id===tab)?"grid":"none";
     });
-    document.getElementById("searchInput").value=""; // clear search
+    document.getElementById("searchInput").value="";
   });
 });
 
 // Search filter
 document.getElementById("searchInput").addEventListener("input",function(){
  const val=this.value.toLowerCase();
- document.querySelectorAll(".tab-content:visible .chart-box").forEach(b=>{
+ document.querySelectorAll(".chart-box").forEach(b=>{
   b.style.display=b.dataset.key.includes(val)?"block":"none";
  });
 });
 
 // Fullscreen buttons
 document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
-    const updateColor = () => {
-        let bgColor = window.getComputedStyle(document.body).backgroundColor;
-        const colorBrightness = (color) => {
-            const c = color.match(/\d+/g);
-            return (parseInt(c[0])*299 + parseInt(c[1])*587 + parseInt(c[2])*114)/1000;
-        };
-        btn.style.background = colorBrightness(bgColor) < 128 ? "#38bdf8" : "#0f172a";
-        btn.style.color = colorBrightness(bgColor) < 128 ? "#000" : "#fff";
-    };
-    updateColor();
     btn.addEventListener("click", function(){
         const chartBox = this.parentElement;
         if(!document.fullscreenElement){
