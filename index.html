@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Price Watch | Live Markets</title>
+<title>Price Watch | All Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;}
 header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617;}
 .notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px;}
+.tabs{display:flex;justify-content:center;gap:12px;background:#020617;padding:10px;flex-wrap:wrap;}
+.tab-btn{padding:8px 12px;background:#1e293b;color:#fff;border:none;border-radius:5px;cursor:pointer;transition:0.3s;}
+.tab-btn.active{background:#38bdf8;color:#000;font-weight:bold;}
 .controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap;}
 input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;width:320px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
@@ -29,60 +32,158 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
 </head>
 <body>
 
-<header>📊 Price Watch – Live Markets</header>
+<header>📊 Price Watch – Complete Markets</header>
 
 <div class="notice">
 ⚠️ Prices are indicative and for educational purposes only.
 </div>
 
-<div class="controls">
-  <input id="searchInput" placeholder="Search: Gold, Oil, BTC, ETH, EUR..." />
+<div class="tabs">
+  <button class="tab-btn active" data-tab="metals">Metals</button>
+  <button class="tab-btn" data-tab="energy">Energy</button>
+  <button class="tab-btn" data-tab="forex">Forex</button>
+  <button class="tab-btn" data-tab="crypto">Crypto</button>
+  <button class="tab-btn" data-tab="indices">Indices</button>
+  <button class="tab-btn" data-tab="commodities">Commodities</button>
 </div>
 
-<div class="grid">
+<div class="controls">
+  <input id="searchInput" placeholder="Search for any asset..." />
+</div>
+
+<!-- Grid containers for each tab -->
+<div id="metals" class="grid tab-content">
   <div class="chart-box" data-key="gold xau metal">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&theme=Dark&style=1"></iframe>
   </div>
-
-  <div class="chart-box" data-key="oil crude wti">
+  <div class="chart-box" data-key="silver xag metal">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:SILVER&interval=60&theme=Dark&style=1"></iframe>
   </div>
-
-  <div class="chart-box" data-key="eurusd eur usd forex">
+  <div class="chart-box" data-key="platinum metal">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:PLATIN&interval=60&theme=Dark&style=1"></iframe>
   </div>
+</div>
 
+<div id="energy" class="grid tab-content" style="display:none;">
+  <div class="chart-box" data-key="oil wti">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="brent oil">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:UKOIL&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="natural gas">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:NG1!&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+</div>
+
+<div id="forex" class="grid tab-content" style="display:none;">
+  <!-- معظم العملات العالمية -->
+  <div class="chart-box" data-key="eur usd forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="gbp usd forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:GBPUSD&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="usd jpy forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:USDJPY&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="aud usd forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:AUDUSD&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="cad usd forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:CADUSD&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <!-- يمكن إضافة المزيد من العملات بنفس الطريقة -->
+</div>
+
+<div id="crypto" class="grid tab-content" style="display:none;">
+  <!-- أكثر العملات الرقمية شهرة -->
   <div class="chart-box" data-key="btc bitcoin crypto">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=Dark&style=1"></iframe>
   </div>
-
   <div class="chart-box" data-key="eth ethereum crypto">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ETHUSDT&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ETHUSDT&interval=60&theme=Dark&style=1"></iframe>
   </div>
-
-  <div class="chart-box" data-key="sp500 index spx">
+  <div class="chart-box" data-key="bnb crypto">
     <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BNBUSDT&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="xrp crypto">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:XRPUSDT&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="ada crypto">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ADAUSDT&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+</div>
+
+<div id="indices" class="grid tab-content" style="display:none;">
+  <div class="chart-box" data-key="sp500 index">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="nasdaq index">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ:NDX&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="dow jones index">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=DJ:DJI&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+</div>
+
+<div id="commodities" class="grid tab-content" style="display:none;">
+  <div class="chart-box" data-key="coffee commodity">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:COFFEE&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="corn commodity">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:CORN&interval=60&theme=Dark&style=1"></iframe>
+  </div>
+  <div class="chart-box" data-key="wheat commodity">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:WHEAT&interval=60&theme=Dark&style=1"></iframe>
   </div>
 </div>
 
 <script>
-//---------------------------
+// Tab switching
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(".tab-content").forEach(tc=>{
+      tc.style.display = (tc.id===tab)?"grid":"none";
+    });
+    document.getElementById("searchInput").value=""; // clear search
+  });
+});
+
 // Search filter
 document.getElementById("searchInput").addEventListener("input",function(){
  const val=this.value.toLowerCase();
- document.querySelectorAll(".chart-box").forEach(b=>{
+ document.querySelectorAll(".tab-content:visible .chart-box").forEach(b=>{
   b.style.display=b.dataset.key.includes(val)?"block":"none";
  });
 });
 
-//---------------------------
-// Fullscreen button dynamic color + shift left
+// Fullscreen buttons
 document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
     const updateColor = () => {
         let bgColor = window.getComputedStyle(document.body).backgroundColor;
