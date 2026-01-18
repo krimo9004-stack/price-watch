@@ -1,74 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PriceWatch</title>
-  <meta name="description" content="PriceWatch - Live info and educational insights on gold, silver, oil, and currency markets.">
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; }
-    header { background: #1a73e8; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
-    nav { background: #f1f1f1; padding: 10px; text-align: center; }
-    nav a { margin: 0 10px; text-decoration: none; color: #1a73e8; font-weight: bold; }
-    section { padding: 20px; max-width: 900px; margin: auto; }
-    footer { text-align: center; padding: 10px; background: #eee; margin-top: 20px; }
-    .widget { margin: 20px 0; text-align: center; }
-    #searchInput { padding:10px; width:60%; font-size:16px; }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>PriceWatch</h1>
-  <p>Live Market Info & Educational Insights</p>
-</header>
-
-<nav>
-  <a href="#">Home</a>
-  <a href="#">Gold</a>
-  <a href="#">Silver</a>
-  <a href="#">Oil</a>
-  <a href="#">Currencies</a>
-</nav>
-
-<section>
-  <h2>Welcome to PriceWatch</h2>
-  <p>Stay informed with the latest educational insights and live market updates on gold, silver, oil, and major currencies. All information is for educational purposes only.</p>
-
-  <!-- Search Box -->
-  <div style="text-align:center; margin-bottom:20px;">
-    <input type="text" id="searchInput" placeholder="Search..." >
+<!-- --- Cryptocurrencies --- -->
+  <div class="widget" data-name="btc">
+    <h3>Bitcoin (BTC/USD)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:BTC" allowtransparency="true"></iframe>
   </div>
 
-  <!-- Gold Widget -->
-  <div class="widget">
-    <h3>Gold (XAU/USD)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=COMEX:GC1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  <div class="widget" data-name="eth">
+    <h3>Ethereum (ETH/USD)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:ETH" allowtransparency="true"></iframe>
   </div>
 
-  <!-- Silver Widget -->
-  <div class="widget">
-    <h3>Silver (XAG/USD)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=COMEX:SI1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  <div class="widget" data-name="xrp">
+    <h3>Ripple (XRP/USD)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:XRP" allowtransparency="true"></iframe>
   </div>
 
-  <!-- Oil Widget -->
-  <div class="widget">
-    <h3>Crude Oil (WTI)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=NYMEX:CL1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  <!-- --- Global Indices --- -->
+  <div class="widget" data-name="sp500">
+    <h3>S&P 500</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:SPX" allowtransparency="true"></iframe>
   </div>
 
-  <!-- EUR/USD Widget -->
-  <div class="widget">
-    <h3>EUR/USD</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=FOREXCOM:EURUSD" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  <div class="widget" data-name="nasdaq">
+    <h3>NASDAQ</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:NDX" allowtransparency="true"></iframe>
   </div>
 
-  <!-- USD/JPY Widget -->
-  <div class="widget">
-    <h3>USD/JPY</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=FOREXCOM:USDJPY" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  <div class="widget" data-name="dowjones">
+    <h3>Dow Jones</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:DJI" allowtransparency="true"></iframe>
   </div>
 
 </section>
@@ -78,12 +37,13 @@
 </footer>
 
 <script>
+  // --- Search Function ---
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('input', function() {
     const filter = searchInput.value.toLowerCase();
     const widgets = document.querySelectorAll('.widget');
     widgets.forEach(widget => {
-      const text = widget.textContent.toLowerCase();
+      const text = widget.dataset.name.toLowerCase() + " " + widget.textContent.toLowerCase();
       if(text.includes(filter)){
         widget.style.display = '';
       } else {
