@@ -15,7 +15,18 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
 .chart-box{background:#020617;border-radius:14px;padding:10px;height:480px;position:relative;overflow:hidden;}
 .chart-box>div{height:100%;width:100%;}
-.fullscreen-btn{position:absolute;top:10px;right:10px;background:#38bdf8;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;font-weight:bold;z-index:10;}
+.fullscreen-btn{
+  position:absolute;
+  top:10px;
+  right:10px; /* البداية، سيتغير ديناميكيًا */
+  padding:5px 8px;
+  border-radius:4px;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:10;
+  border:none;
+  transition: all 0.3s ease;
+}
 </style>
 </head>
 
@@ -69,7 +80,7 @@ function loadAdvancedChart(id, symbol){
   });
 }
 
-// Accurate free symbols
+// Accurate free symbols (تم حذف أي أصل متعلق بالعملة الإسرائيلية)
 const charts={
  gold:"OANDA:XAUUSD",
  oil:"TVC:USOIL",
@@ -92,20 +103,11 @@ document.getElementById("searchInput").addEventListener("input",function(){
 });
 
 //---------------------------
-// Fullscreen button
+// Fullscreen button dynamic color + shift left
 document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
- btn.addEventListener("click", function(){
-    const chartBox = this.parentElement;
-    if(!document.fullscreenElement){
-      chartBox.requestFullscreen().catch(err=>{
-        alert("Fullscreen failed: " + err.message);
-      });
-    }else{
-      document.exitFullscreen();
-    }
- });
-});
-</script>
+    // تحريك 3cm نحو اليسار
+    btn.style.right = "calc(10px + 3cm)";
 
-</body>
-</html>
+    // تغيير اللون تلقائيًا حسب الخلفية
+    const updateColor = () => {
+        let bgColor = window.getComputedStyle(document.body).backgroundColor;
