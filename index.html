@@ -7,15 +7,15 @@
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff}
-header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617}
-.notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px}
-.controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap}
-input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px}
-.chart-box{background:#020617;border-radius:14px;padding:10px;height:420px;position:relative}
-.chart-box>div{height:100%}
-.fullscreen-btn{position:absolute;top:10px;right:10px;background:#38bdf8;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;font-weight:bold}
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;}
+header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617;}
+.notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px;}
+.controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap;}
+input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
+.chart-box{background:#020617;border-radius:14px;padding:10px;height:480px;position:relative;overflow:hidden;}
+.chart-box>div{height:100%;width:100%;}
+.fullscreen-btn{position:absolute;top:10px;right:10px;background:#38bdf8;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;font-weight:bold;z-index:10;}
 </style>
 </head>
 
@@ -42,11 +42,10 @@ input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:
 
 <script>
 //---------------------------
-// Load TradingView charts with maximum accuracy
-function loadChart(id, symbol){
-  if(window[id]) window[id].remove();
-  window[id] = new TradingView.widget({
-    container_id: id,
+// Load charts
+function loadChart(id,symbol){
+  new TradingView.widget({
+    container_id:id,
     autosize:true,
     symbol:symbol,
     interval:"60",
@@ -56,21 +55,20 @@ function loadChart(id, symbol){
     locale:"en",
     enable_publishing:false,
     hide_top_toolbar:false,
+    hide_side_toolbar:false,
     save_image:false,
-    allow_symbol_change:true, // يسمح بتغيير الأصل من الأداة
     studies: ["MACD@tv-basicstudies","RSI@tv-basicstudies"] // أدوات تحليل
   });
 }
 
-//---------------------------
-// Most accurate free symbols
+// Accurate free symbols
 const charts={
- gold:"TVC:GOLD",
- oil:"TVC:USOIL",
- eurusd:"FX:EURUSD",
- btc:"BINANCE:BTCUSDT",
- eth:"BINANCE:ETHUSDT",
- sp500:"SP:SPX"
+ gold:"OANDA:XAUUSD",        // الذهب
+ oil:"TVC:USOIL",            // النفط
+ eurusd:"OANDA:EURUSD",      // اليورو مقابل الدولار
+ btc:"BINANCE:BTCUSDT",      // البيتكوين
+ eth:"BINANCE:ETHUSDT",      // الإيثيريوم
+ sp500:"SP:SPX"              // مؤشر S&P500
 };
 
 // Load all charts
