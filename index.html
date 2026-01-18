@@ -1,83 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Price Watch | Live Markets</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://s3.tradingview.com/tv.js"></script>
+<meta charset="UTF-8" />
+<title>Price Watch | Live Markets</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://s3.tradingview.com/tv.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
-    }
-
-    header {
-      text-align: center;
-      padding: 20px;
-      font-size: 26px;
-      font-weight: bold;
-      background: #020617;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 24px;
-      padding: 24px;
-    }
-
-    .chart-box {
-      background: #020617;
-      border-radius: 14px;
-      padding: 10px;
-      height: 420px;
-    }
-
-    .chart-box > div {
-      height: 100%;
-    }
-  </style>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff}
+header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617}
+.notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px}
+.controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap}
+input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px}
+.chart-box{background:#020617;border-radius:14px;padding:10px;height:420px;position:relative}
+.chart-box>div{height:100%}
+.fullscreen-btn{position:absolute;top:10px;right:10px;background:#38bdf8;border:none;padding:5px 8px;border-radius:4px;cursor:pointer;font-weight:bold}
+</style>
 </head>
 
 <body>
 
 <header>📊 Price Watch – Live Markets</header>
 
+<div class="notice">
+⚠️ Prices are indicative and for educational purposes only.
+</div>
+
+<div class="controls">
+  <input id="searchInput" placeholder="Search: Gold, XAU, BTC, ETH, EUR..." />
+</div>
+
 <div class="grid">
-  <div class="chart-box"><div id="gold"></div></div>
-  <div class="chart-box"><div id="oil"></div></div>
-  <div class="chart-box"><div id="eurusd"></div></div>
-  <div class="chart-box"><div id="btc"></div></div>
-  <div class="chart-box"><div id="eth"></div></div>
-  <div class="chart-box"><div id="sp500"></div></div>
+  <div class="chart-box" data-key="gold xau metal"><button class="fullscreen-btn">⛶</button><div id="gold"></div></div>
+  <div class="chart-box" data-key="oil crude wti"><button class="fullscreen-btn">⛶</button><div id="oil"></div></div>
+  <div class="chart-box" data-key="eurusd eur usd forex"><button class="fullscreen-btn">⛶</button><div id="eurusd"></div></div>
+  <div class="chart-box" data-key="btc bitcoin crypto"><button class="fullscreen-btn">⛶</button><div id="btc"></div></div>
+  <div class="chart-box" data-key="eth ethereum crypto"><button class="fullscreen-btn">⛶</button><div id="eth"></div></div>
+  <div class="chart-box" data-key="sp500 index spx"><button class="fullscreen-btn">⛶</button><div id="sp500"></div></div>
 </div>
 
 <script>
-function loadChart(id, symbol) {
-  new TradingView.widget({
+//---------------------------
+// Load TradingView charts with maximum accuracy
+function loadChart(id, symbol){
+  if(window[id]) window[id].remove();
+  window[id] = new TradingView.widget({
     container_id: id,
-    autosize: true,
-    symbol: symbol,
-    interval: "30",
-    timezone: "Etc/UTC",
-    theme: "dark",
-    style: "1",
-    locale: "en",
-    enable_publishing: false,
-    hide_top_toolbar: false,
-    save_image: false
+    autosize:true,
+    symbol:symbol,
+    interval:"60",
+    timezone:"Etc/UTC",
+    theme:"dark",
+    style:1, // شموع يابانية
+    locale:"en",
+    enable_publishing:false,
+    hide_top_toolbar:false,
+    save_image:false,
+    allow_symbol_change:true, // يسمح بتغيير الأصل من الأداة
+    studies: ["MACD@tv-basicstudies","RSI@tv-basicstudies"] // أدوات تحليل
   });
 }
 
-loadChart("gold", "OANDA:XAUUSD");
-loadChart("oil", "TVC:USOIL");
-loadChart("eurusd", "OANDA:EURUSD");
-loadChart("btc", "BINANCE:BTCUSDT");
-loadChart("eth", "BINANCE:ETHUSDT");
-loadChart("sp500", "SP:SPX");
+//---------------------------
+// Most accurate free symbols
+const charts={
+ gold:"TVC:GOLD",
+ oil:"TVC:USOIL",
+ eurusd:"FX:EURUSD",
+ btc:"BINANCE:BTCUSDT",
+ eth:"BINANCE:ETHUSDT",
+ sp500:"SP:SPX"
+};
+
+// Load all charts
+for(let c in charts) loadChart(c,charts[c]);
+
+//---------------------------
+// Search filter
+document.getElementById("searchInput").addEventListener("input",function(){
+ const v=this.value.toLowerCase();
+ document.querySelectorAll(".chart-box").forEach(b=>{
+  b.style.display=b.dataset.key.includes(v)?"block":"none";
+ });
+});
+
+//---------------------------
+// Fullscreen button
+document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
+ btn.onclick=()=>btn.parentElement.requestFullscreen();
+});
 </script>
 
 </body>
