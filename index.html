@@ -11,7 +11,7 @@
     h1 { margin: 0; }
     nav { background: #f1f1f1; padding: 10px; text-align: center; }
     nav a { margin: 0 10px; text-decoration: none; color: #1a73e8; font-weight: bold; }
-    section { padding: 20px; max-width: 800px; margin: auto; }
+    section { padding: 20px; max-width: 900px; margin: auto; }
     footer { text-align: center; padding: 10px; background: #eee; margin-top: 20px; }
     .widget { margin: 20px 0; text-align: center; }
   </style>
@@ -35,14 +35,34 @@
   <h2>Welcome to PriceWatch</h2>
   <p>Stay informed with the latest educational insights and live market updates on gold, silver, oil, and major currencies. All information is for educational purposes only.</p>
 
+  <!-- Gold Widget -->
   <div class="widget">
-    <!-- Widget TradingView لزوج العملات EUR/USD -->
+    <h3>Gold (XAU/USD)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=COMEX:GC1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+
+  <!-- Silver Widget -->
+  <div class="widget">
+    <h3>Silver (XAG/USD)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=COMEX:SI1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+
+  <!-- Oil Widget -->
+  <div class="widget">
+    <h3>Crude Oil (WTI)</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=NYMEX:CL1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+
+  <!-- EUR/USD Widget -->
+  <div class="widget">
+    <h3>EUR/USD</h3>
     <iframe src="https://s.tradingview.com/widgetembed/?symbol=FOREXCOM:EURUSD" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
   </div>
 
+  <!-- USD/JPY Widget -->
   <div class="widget">
-    <!-- Widget TradingView للذهب -->
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=COMEX:GC1!" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
+    <h3>USD/JPY</h3>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=FOREXCOM:USDJPY" width="100%" height="400" frameborder="0" allowtransparency="true"></iframe>
   </div>
 
 </section>
