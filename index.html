@@ -13,6 +13,7 @@
       background: #0f172a;
       color: #fff;
     }
+
     header {
       text-align: center;
       padding: 20px;
@@ -20,16 +21,23 @@
       font-weight: bold;
       background: #020617;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      padding: 24px;
     }
-    .chart {
+
+    .chart-box {
       background: #020617;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 10px;
+      height: 420px;
+    }
+
+    .chart-box > div {
+      height: 100%;
     }
   </style>
 </head>
@@ -39,12 +47,12 @@
 <header>📊 Price Watch – Live Markets</header>
 
 <div class="grid">
-  <div class="chart" id="gold"></div>
-  <div class="chart" id="oil"></div>
-  <div class="chart" id="eurusd"></div>
-  <div class="chart" id="btc"></div>
-  <div class="chart" id="eth"></div>
-  <div class="chart" id="sp500"></div>
+  <div class="chart-box"><div id="gold"></div></div>
+  <div class="chart-box"><div id="oil"></div></div>
+  <div class="chart-box"><div id="eurusd"></div></div>
+  <div class="chart-box"><div id="btc"></div></div>
+  <div class="chart-box"><div id="eth"></div></div>
+  <div class="chart-box"><div id="sp500"></div></div>
 </div>
 
 <script>
@@ -56,7 +64,7 @@ function loadChart(id, symbol) {
     interval: "30",
     timezone: "Etc/UTC",
     theme: "dark",
-    style: "1", // 1 = Japanese Candles
+    style: "1",
     locale: "en",
     enable_publishing: false,
     hide_top_toolbar: false,
