@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Price Watch | Live Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;}
 header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617;}
 .notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px;}
 .controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap;}
-input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;}
+input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;width:320px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
 .chart-box{background:#020617;border-radius:14px;padding:10px;height:480px;position:relative;overflow:hidden;}
 .chart-box>div{height:100%;width:100%;}
@@ -42,51 +42,68 @@ input, select{padding:10px;font-size:16px;border-radius:6px;border:none;outline:
 
 <script>
 //---------------------------
-// Load charts
-function loadChart(id,symbol){
+// Load Advanced TradingView Charts
+function loadAdvancedChart(id, symbol){
   new TradingView.widget({
-    container_id:id,
-    autosize:true,
-    symbol:symbol,
-    interval:"60",
-    timezone:"Etc/UTC",
-    theme:"dark",
-    style:1, // شموع يابانية
-    locale:"en",
-    enable_publishing:false,
-    hide_top_toolbar:false,
-    hide_side_toolbar:false,
-    save_image:false,
-    studies: ["MACD@tv-basicstudies","RSI@tv-basicstudies"] // أدوات تحليل
+    "autosize": true,
+    "symbol": symbol,
+    "interval": "60",
+    "timezone": "Etc/UTC",
+    "theme": "dark",
+    "style": 1,
+    "locale": "en",
+    "container_id": id,
+    "allow_symbol_change": true,
+    "hide_side_toolbar": false,
+    "withdateranges": true,
+    "save_image": true,
+    "hideideas": true,
+    "studies": [
+      "MACD@tv-basicstudies",
+      "RSI@tv-basicstudies",
+      "BollingerBands@tv-basicstudies"
+    ],
+    "details": true,
+    "hotlist": true,
+    "calendar": true
   });
 }
 
 // Accurate free symbols
 const charts={
- gold:"OANDA:XAUUSD",        // الذهب
- oil:"TVC:USOIL",            // النفط
- eurusd:"OANDA:EURUSD",      // اليورو مقابل الدولار
- btc:"BINANCE:BTCUSDT",      // البيتكوين
- eth:"BINANCE:ETHUSDT",      // الإيثيريوم
- sp500:"SP:SPX"              // مؤشر S&P500
+ gold:"OANDA:XAUUSD",
+ oil:"TVC:USOIL",
+ eurusd:"OANDA:EURUSD",
+ btc:"BINANCE:BTCUSDT",
+ eth:"BINANCE:ETHUSDT",
+ sp500:"SP:SPX"
 };
 
 // Load all charts
-for(let c in charts) loadChart(c,charts[c]);
+for(let c in charts) loadAdvancedChart(c, charts[c]);
 
 //---------------------------
 // Search filter
 document.getElementById("searchInput").addEventListener("input",function(){
- const v=this.value.toLowerCase();
+ const val=this.value.toLowerCase();
  document.querySelectorAll(".chart-box").forEach(b=>{
-  b.style.display=b.dataset.key.includes(v)?"block":"none";
+  b.style.display=b.dataset.key.includes(val)?"block":"none";
  });
 });
 
 //---------------------------
 // Fullscreen button
 document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
- btn.onclick=()=>btn.parentElement.requestFullscreen();
+ btn.addEventListener("click", function(){
+    const chartBox = this.parentElement;
+    if(!document.fullscreenElement){
+      chartBox.requestFullscreen().catch(err=>{
+        alert("Fullscreen failed: " + err.message);
+      });
+    }else{
+      document.exitFullscreen();
+    }
+ });
 });
 </script>
 
