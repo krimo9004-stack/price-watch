@@ -14,6 +14,7 @@
     section { padding: 20px; max-width: 900px; margin: auto; }
     footer { text-align: center; padding: 10px; background: #eee; margin-top: 20px; }
     .widget { margin: 20px 0; text-align: center; }
+    #searchInput { padding:10px; width:60%; font-size:16px; }
   </style>
 </head>
 <body>
@@ -34,6 +35,11 @@
 <section>
   <h2>Welcome to PriceWatch</h2>
   <p>Stay informed with the latest educational insights and live market updates on gold, silver, oil, and major currencies. All information is for educational purposes only.</p>
+
+  <!-- Search Box -->
+  <div style="text-align:center; margin-bottom:20px;">
+    <input type="text" id="searchInput" placeholder="Search..." >
+  </div>
 
   <!-- Gold Widget -->
   <div class="widget">
@@ -70,6 +76,22 @@
 <footer>
   &copy; 2026 PriceWatch | Educational & Market Insights
 </footer>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', function() {
+    const filter = searchInput.value.toLowerCase();
+    const widgets = document.querySelectorAll('.widget');
+    widgets.forEach(widget => {
+      const text = widget.textContent.toLowerCase();
+      if(text.includes(filter)){
+        widget.style.display = '';
+      } else {
+        widget.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
