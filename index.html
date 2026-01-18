@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <title>Price Watch | Live Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;}
 header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617;}
@@ -14,11 +12,11 @@ header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background
 input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;width:320px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
 .chart-box{background:#020617;border-radius:14px;padding:10px;height:480px;position:relative;overflow:hidden;}
-.chart-box>div{height:100%;width:100%;}
+.chart-box iframe{width:100%;height:100%;border:none;}
 .fullscreen-btn{
   position:absolute;
   top:10px;
-  right:10px; /* البداية، سيتغير ديناميكيًا */
+  right:calc(10px + 3cm);
   padding:5px 8px;
   border-radius:4px;
   cursor:pointer;
@@ -29,7 +27,6 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
 }
 </style>
 </head>
-
 <body>
 
 <header>📊 Price Watch – Live Markets</header>
@@ -39,60 +36,42 @@ input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;wid
 </div>
 
 <div class="controls">
-  <input id="searchInput" placeholder="Search: Gold, XAU, BTC, ETH, EUR..." />
+  <input id="searchInput" placeholder="Search: Gold, Oil, BTC, ETH, EUR..." />
 </div>
 
 <div class="grid">
-  <div class="chart-box" data-key="gold xau metal"><button class="fullscreen-btn">⛶</button><div id="gold"></div></div>
-  <div class="chart-box" data-key="oil crude wti"><button class="fullscreen-btn">⛶</button><div id="oil"></div></div>
-  <div class="chart-box" data-key="eurusd eur usd forex"><button class="fullscreen-btn">⛶</button><div id="eurusd"></div></div>
-  <div class="chart-box" data-key="btc bitcoin crypto"><button class="fullscreen-btn">⛶</button><div id="btc"></div></div>
-  <div class="chart-box" data-key="eth ethereum crypto"><button class="fullscreen-btn">⛶</button><div id="eth"></div></div>
-  <div class="chart-box" data-key="sp500 index spx"><button class="fullscreen-btn">⛶</button><div id="sp500"></div></div>
+  <div class="chart-box" data-key="gold xau metal">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
+
+  <div class="chart-box" data-key="oil crude wti">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
+
+  <div class="chart-box" data-key="eurusd eur usd forex">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
+
+  <div class="chart-box" data-key="btc bitcoin crypto">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
+
+  <div class="chart-box" data-key="eth ethereum crypto">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ETHUSDT&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
+
+  <div class="chart-box" data-key="sp500 index spx">
+    <button class="fullscreen-btn">⛶</button>
+    <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&hidesidetoolbar=0&theme=Dark&style=1"></iframe>
+  </div>
 </div>
 
 <script>
-//---------------------------
-// Load Advanced TradingView Charts
-function loadAdvancedChart(id, symbol){
-  new TradingView.widget({
-    "autosize": true,
-    "symbol": symbol,
-    "interval": "60",
-    "timezone": "Etc/UTC",
-    "theme": "dark",
-    "style": 1,
-    "locale": "en",
-    "container_id": id,
-    "allow_symbol_change": true,
-    "hide_side_toolbar": false,
-    "withdateranges": true,
-    "save_image": true,
-    "hideideas": true,
-    "studies": [
-      "MACD@tv-basicstudies",
-      "RSI@tv-basicstudies",
-      "BollingerBands@tv-basicstudies"
-    ],
-    "details": true,
-    "hotlist": true,
-    "calendar": true
-  });
-}
-
-// Accurate free symbols (تم حذف أي أصل متعلق بالعملة الإسرائيلية)
-const charts={
- gold:"OANDA:XAUUSD",
- oil:"TVC:USOIL",
- eurusd:"OANDA:EURUSD",
- btc:"BINANCE:BTCUSDT",
- eth:"BINANCE:ETHUSDT",
- sp500:"SP:SPX"
-};
-
-// Load all charts
-for(let c in charts) loadAdvancedChart(c, charts[c]);
-
 //---------------------------
 // Search filter
 document.getElementById("searchInput").addEventListener("input",function(){
@@ -105,9 +84,28 @@ document.getElementById("searchInput").addEventListener("input",function(){
 //---------------------------
 // Fullscreen button dynamic color + shift left
 document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
-    // تحريك 3cm نحو اليسار
-    btn.style.right = "calc(10px + 3cm)";
-
-    // تغيير اللون تلقائيًا حسب الخلفية
     const updateColor = () => {
         let bgColor = window.getComputedStyle(document.body).backgroundColor;
+        const colorBrightness = (color) => {
+            const c = color.match(/\d+/g);
+            return (parseInt(c[0])*299 + parseInt(c[1])*587 + parseInt(c[2])*114)/1000;
+        };
+        btn.style.background = colorBrightness(bgColor) < 128 ? "#38bdf8" : "#0f172a";
+        btn.style.color = colorBrightness(bgColor) < 128 ? "#000" : "#fff";
+    };
+    updateColor();
+    btn.addEventListener("click", function(){
+        const chartBox = this.parentElement;
+        if(!document.fullscreenElement){
+            chartBox.requestFullscreen().catch(err=>{
+                alert("Fullscreen failed: " + err.message);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    });
+});
+</script>
+
+</body>
+</html>
