@@ -1,112 +1,75 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Price Watch</title>
+  <meta charset="UTF-8" />
+  <title>Price Watch | Live Markets</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- TradingView -->
   <script src="https://s3.tradingview.com/tv.js"></script>
 
   <style>
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
       background: #0f172a;
       color: #fff;
-      font-family: Arial, sans-serif;
     }
-
     header {
-      background: #020617;
-      padding: 15px;
       text-align: center;
-      font-size: 22px;
+      padding: 20px;
+      font-size: 26px;
       font-weight: bold;
-    }
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px;
       background: #020617;
-      flex-wrap: wrap;
     }
-
-    select {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .chart {
+      background: #020617;
+      border-radius: 12px;
       padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-    }
-
-    #chart {
-      height: 550px;
     }
   </style>
 </head>
 
 <body>
 
-<header>📊 Price Watch – متابعة الأسعار</header>
+<header>📊 Price Watch – Live Markets</header>
 
-<div class="controls">
-  <select id="symbol">
-    <optgroup label="🟡 معادن">
-      <option value="TVC:GOLD">Gold (XAU/USD)</option>
-      <option value="TVC:SILVER">Silver (XAG/USD)</option>
-    </optgroup>
-
-    <optgroup label="🪙 عملات رقمية">
-      <option value="BINANCE:BTCUSDT">Bitcoin (BTC)</option>
-      <option value="BINANCE:ETHUSDT">Ethereum (ETH)</option>
-      <option value="BINANCE:XRPUSDT">Ripple (XRP)</option>
-    </optgroup>
-
-    <optgroup label="💱 عملات دولية">
-      <option value="FX:EURUSD">EUR / USD</option>
-      <option value="FX:USDJPY">USD / JPY</option>
-      <option value="FX:GBPUSD">GBP / USD</option>
-    </optgroup>
-
-    <optgroup label="📈 مؤشرات">
-      <option value="SP:SPX">S&P 500</option>
-      <option value="NASDAQ:NDX">NASDAQ</option>
-      <option value="DJ:DJI">Dow Jones</option>
-    </optgroup>
-  </select>
+<div class="grid">
+  <div class="chart" id="gold"></div>
+  <div class="chart" id="oil"></div>
+  <div class="chart" id="eurusd"></div>
+  <div class="chart" id="btc"></div>
+  <div class="chart" id="eth"></div>
+  <div class="chart" id="sp500"></div>
 </div>
 
-<div id="chart"></div>
-
 <script>
-let widget;
-
-function loadChart(symbol){
-  if(widget) widget.remove();
-
-  widget = new TradingView.widget({
-    container_id: "chart",
+function loadChart(id, symbol) {
+  new TradingView.widget({
+    container_id: id,
     autosize: true,
     symbol: symbol,
-    interval: "60",
-    timezone: "Africa/Algiers",
+    interval: "30",
+    timezone: "Etc/UTC",
     theme: "dark",
-    style: "1", // 1 = شموع يابانية
-    locale: "ar",
+    style: "1", // 1 = Japanese Candles
+    locale: "en",
     enable_publishing: false,
     hide_top_toolbar: false,
-    hide_side_toolbar: false,
-    withdateranges: true
+    save_image: false
   });
 }
 
-loadChart("TVC:GOLD");
-
-document.getElementById("symbol").addEventListener("change", function(){
-  loadChart(this.value);
-});
+loadChart("gold", "OANDA:XAUUSD");
+loadChart("oil", "TVC:USOIL");
+loadChart("eurusd", "OANDA:EURUSD");
+loadChart("btc", "BINANCE:BTCUSDT");
+loadChart("eth", "BINANCE:ETHUSDT");
+loadChart("sp500", "SP:SPX");
 </script>
 
 </body>
