@@ -1,56 +1,154 @@
-<!-- --- Cryptocurrencies --- -->
-  <div class="widget" data-name="btc">
-    <h3>Bitcoin (BTC/USD)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:BTC" allowtransparency="true"></iframe>
-  </div>
 
-  <div class="widget" data-name="eth">
-    <h3>Ethereum (ETH/USD)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:ETH" allowtransparency="true"></iframe>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PriceWatch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="widget" data-name="xrp">
-    <h3>Ripple (XRP/USD)</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTOCAP:XRP" allowtransparency="true"></iframe>
-  </div>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b1220;
+  color:#fff;
+}
+header{
+  background:#111827;
+  padding:20px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  color:#38bdf8;
+}
+header p{
+  color:#9ca3af;
+}
+#search{
+  width:90%;
+  max-width:600px;
+  margin:20px auto;
+  display:block;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:10px;
+}
+.widget{
+  background:#111827;
+  margin-bottom:20px;
+  padding:15px;
+  border-radius:12px;
+}
+.widget h3{
+  margin-top:0;
+  color:#38bdf8;
+}
+iframe{
+  width:100%;
+  height:420px;
+  border:none;
+  border-radius:10px;
+}
+footer{
+  text-align:center;
+  padding:15px;
+  background:#111827;
+  color:#9ca3af;
+}
+</style>
+</head>
 
-  <!-- --- Global Indices --- -->
-  <div class="widget" data-name="sp500">
-    <h3>S&P 500</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:SPX" allowtransparency="true"></iframe>
-  </div>
+<body>
 
-  <div class="widget" data-name="nasdaq">
-    <h3>NASDAQ</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:NDX" allowtransparency="true"></iframe>
-  </div>
+<header>
+  <h1>PriceWatch</h1>
+  <p>Live Global Market Prices</p>
+</header>
 
-  <div class="widget" data-name="dowjones">
-    <h3>Dow Jones</h3>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=INDEX:DJI" allowtransparency="true"></iframe>
-  </div>
+<input id="search" placeholder="Search: gold, oil, BTC, USD, NASDAQ..." />
 
-</section>
+<div class="container">
+
+<!-- METALS -->
+<div class="widget" data-name="gold">
+<h3>Gold (XAU/USD)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=TVC:GOLD&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="silver">
+<h3>Silver (XAG/USD)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=TVC:SILVER&theme=dark"></iframe>
+</div>
+
+<!-- OIL -->
+<div class="widget" data-name="oil">
+<h3>Crude Oil (WTI)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=NYMEX:CL1!&theme=dark"></iframe>
+</div>
+
+<!-- FOREX -->
+<div class="widget" data-name="eurusd">
+<h3>EUR / USD</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=FX:EURUSD&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="usdjpy">
+<h3>USD / JPY</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=FX:USDJPY&theme=dark"></iframe>
+</div>
+
+<!-- CRYPTO -->
+<div class="widget" data-name="bitcoin">
+<h3>Bitcoin (BTC/USD)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:BTCUSDT&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="ethereum">
+<h3>Ethereum (ETH/USD)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:ETHUSDT&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="xrp">
+<h3>Ripple (XRP/USD)</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:XRPUSDT&theme=dark"></iframe>
+</div>
+
+<!-- INDICES -->
+<div class="widget" data-name="sp500">
+<h3>S&P 500</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=SP:SPX&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="nasdaq">
+<h3>NASDAQ 100</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=NASDAQ:NDX&theme=dark"></iframe>
+</div>
+
+<div class="widget" data-name="dowjones">
+<h3>Dow Jones</h3>
+<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=DJ:DJI&theme=dark"></iframe>
+</div>
+
+</div>
 
 <footer>
-  &copy; 2026 PriceWatch | Educational & Market Insights
+© 2026 PriceWatch
 </footer>
 
 <script>
-  // --- Search Function ---
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', function() {
-    const filter = searchInput.value.toLowerCase();
-    const widgets = document.querySelectorAll('.widget');
-    widgets.forEach(widget => {
-      const text = widget.dataset.name.toLowerCase() + " " + widget.textContent.toLowerCase();
-      if(text.includes(filter)){
-        widget.style.display = '';
-      } else {
-        widget.style.display = 'none';
-      }
-    });
+document.getElementById("search").addEventListener("input", function(){
+  let v = this.value.toLowerCase();
+  document.querySelectorAll(".widget").forEach(w=>{
+    w.style.display = w.dataset.name.includes(v) ? "block" : "none";
   });
+});
 </script>
 
 </body>
