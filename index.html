@@ -1,153 +1,111 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>PriceWatch</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Price Watch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b1220;
-  color:#fff;
-}
-header{
-  background:#111827;
-  padding:20px;
-  text-align:center;
-}
-header h1{
-  margin:0;
-  color:#38bdf8;
-}
-header p{
-  color:#9ca3af;
-}
-#search{
-  width:90%;
-  max-width:600px;
-  margin:20px auto;
-  display:block;
-  padding:12px;
-  border-radius:8px;
-  border:none;
-  font-size:16px;
-}
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:10px;
-}
-.widget{
-  background:#111827;
-  margin-bottom:20px;
-  padding:15px;
-  border-radius:12px;
-}
-.widget h3{
-  margin-top:0;
-  color:#38bdf8;
-}
-iframe{
-  width:100%;
-  height:420px;
-  border:none;
-  border-radius:10px;
-}
-footer{
-  text-align:center;
-  padding:15px;
-  background:#111827;
-  color:#9ca3af;
-}
-</style>
+  <!-- TradingView -->
+  <script src="https://s3.tradingview.com/tv.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #020617;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: #020617;
+      flex-wrap: wrap;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    #chart {
+      height: 550px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>PriceWatch</h1>
-  <p>Live Global Market Prices</p>
-</header>
+<header>📊 Price Watch – متابعة الأسعار</header>
 
-<input id="search" placeholder="Search: gold, oil, BTC, USD, NASDAQ..." />
+<div class="controls">
+  <select id="symbol">
+    <optgroup label="🟡 معادن">
+      <option value="TVC:GOLD">Gold (XAU/USD)</option>
+      <option value="TVC:SILVER">Silver (XAG/USD)</option>
+    </optgroup>
 
-<div class="container">
+    <optgroup label="🪙 عملات رقمية">
+      <option value="BINANCE:BTCUSDT">Bitcoin (BTC)</option>
+      <option value="BINANCE:ETHUSDT">Ethereum (ETH)</option>
+      <option value="BINANCE:XRPUSDT">Ripple (XRP)</option>
+    </optgroup>
 
-<!-- METALS -->
-<div class="widget" data-name="gold">
-<h3>Gold (XAU/USD)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=TVC:GOLD&theme=dark"></iframe>
+    <optgroup label="💱 عملات دولية">
+      <option value="FX:EURUSD">EUR / USD</option>
+      <option value="FX:USDJPY">USD / JPY</option>
+      <option value="FX:GBPUSD">GBP / USD</option>
+    </optgroup>
+
+    <optgroup label="📈 مؤشرات">
+      <option value="SP:SPX">S&P 500</option>
+      <option value="NASDAQ:NDX">NASDAQ</option>
+      <option value="DJ:DJI">Dow Jones</option>
+    </optgroup>
+  </select>
 </div>
 
-<div class="widget" data-name="silver">
-<h3>Silver (XAG/USD)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=TVC:SILVER&theme=dark"></iframe>
-</div>
-
-<!-- OIL -->
-<div class="widget" data-name="oil">
-<h3>Crude Oil (WTI)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=NYMEX:CL1!&theme=dark"></iframe>
-</div>
-
-<!-- FOREX -->
-<div class="widget" data-name="eurusd">
-<h3>EUR / USD</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=FX:EURUSD&theme=dark"></iframe>
-</div>
-
-<div class="widget" data-name="usdjpy">
-<h3>USD / JPY</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=FX:USDJPY&theme=dark"></iframe>
-</div>
-
-<!-- CRYPTO -->
-<div class="widget" data-name="bitcoin">
-<h3>Bitcoin (BTC/USD)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:BTCUSDT&theme=dark"></iframe>
-</div>
-
-<div class="widget" data-name="ethereum">
-<h3>Ethereum (ETH/USD)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:ETHUSDT&theme=dark"></iframe>
-</div>
-
-<div class="widget" data-name="xrp">
-<h3>Ripple (XRP/USD)</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=BINANCE:XRPUSDT&theme=dark"></iframe>
-</div>
-
-<!-- INDICES -->
-<div class="widget" data-name="sp500">
-<h3>S&P 500</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=SP:SPX&theme=dark"></iframe>
-</div>
-
-<div class="widget" data-name="nasdaq">
-<h3>NASDAQ 100</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=NASDAQ:NDX&theme=dark"></iframe>
-</div>
-
-<div class="widget" data-name="dowjones">
-<h3>Dow Jones</h3>
-<iframe src="https://www.tradingview.com/embed-widget/symbol-overview/?symbol=DJ:DJI&theme=dark"></iframe>
-</div>
-
-</div>
-
-<footer>
-© 2026 PriceWatch
-</footer>
+<div id="chart"></div>
 
 <script>
-document.getElementById("search").addEventListener("input", function(){
-  let v = this.value.toLowerCase();
-  document.querySelectorAll(".widget").forEach(w=>{
-    w.style.display = w.dataset.name.includes(v) ? "block" : "none";
+let widget;
+
+function loadChart(symbol){
+  if(widget) widget.remove();
+
+  widget = new TradingView.widget({
+    container_id: "chart",
+    autosize: true,
+    symbol: symbol,
+    interval: "60",
+    timezone: "Africa/Algiers",
+    theme: "dark",
+    style: "1", // 1 = شموع يابانية
+    locale: "ar",
+    enable_publishing: false,
+    hide_top_toolbar: false,
+    hide_side_toolbar: false,
+    withdateranges: true
   });
+}
+
+loadChart("TVC:GOLD");
+
+document.getElementById("symbol").addEventListener("change", function(){
+  loadChart(this.value);
 });
 </script>
 
