@@ -2,150 +2,112 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Price Watch | All Markets</title>
+<title>Price Watch | Live Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff;}
-header{text-align:center;padding:20px;font-size:26px;font-weight:bold;background:#020617;}
-.notice{background:#020617;color:#94a3b8;padding:10px;text-align:center;font-size:14px;}
-.tabs{display:flex;justify-content:center;gap:12px;background:#020617;padding:10px;flex-wrap:wrap;}
-.tab-btn{padding:8px 12px;background:#1e293b;color:#fff;border:none;border-radius:5px;cursor:pointer;transition:0.3s;}
-.tab-btn.active{background:#38bdf8;color:#000;font-weight:bold;}
-.controls{display:flex;justify-content:center;align-items:center;gap:10px;padding:12px;background:#020617;flex-wrap:wrap;}
-input{padding:10px;font-size:16px;border-radius:6px;border:none;outline:none;width:320px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px;padding:24px;}
-.chart-box{background:#020617;border-radius:14px;padding:10px;height:480px;position:relative;overflow:hidden;}
-.chart-box iframe{width:100%;height:100%;border:none;}
-.fullscreen-btn{
-  position:absolute;
-  top:10px;
-  right:calc(10px + 3cm);
-  padding:5px 8px;
-  border-radius:4px;
-  cursor:pointer;
-  font-weight:bold;
-  z-index:10;
-  border:none;
-  transition: all 0.3s ease;
-}
+body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
+header{padding:20px;text-align:center;font-size:26px;font-weight:bold;background:#020617}
+.tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;background:#020617;padding:10px}
+.tab{padding:8px 14px;border-radius:6px;border:none;cursor:pointer;background:#1e293b;color:#fff}
+.tab.active{background:#38bdf8;color:#000}
+.section{display:none;padding:20px}
+.section.active{display:block}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #1e293b;text-align:left}
+th{color:#38bdf8}
+.search{margin:15px auto;display:block;width:300px;padding:10px;border-radius:6px;border:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:20px}
+.box{background:#020617;border-radius:14px;height:450px;position:relative}
+iframe{width:100%;height:100%;border:none}
+.full{position:absolute;top:10px;right:3cm;padding:6px;border:none;border-radius:5px;background:#38bdf8;cursor:pointer}
 </style>
 </head>
 <body>
 
-<header>📊 Price Watch – Complete Markets</header>
-
-<div class="notice">
-⚠️ Prices are indicative and for educational purposes only.
-</div>
+<header>📊 Price Watch – Live Global Markets</header>
 
 <div class="tabs">
-  <button class="tab-btn active" data-tab="metals">Metals</button>
-  <button class="tab-btn" data-tab="energy">Energy</button>
-  <button class="tab-btn" data-tab="forex">Forex</button>
-  <button class="tab-btn" data-tab="crypto">Crypto</button>
-  <button class="tab-btn" data-tab="indices">Indices</button>
-  <button class="tab-btn" data-tab="commodities">Commodities</button>
+  <button class="tab active" data-tab="crypto">Crypto (Live)</button>
+  <button class="tab" data-tab="forex">Forex (Live)</button>
+  <button class="tab" data-tab="markets">Markets</button>
 </div>
 
-<div class="controls">
-  <input id="searchInput" placeholder="Search for any asset..." />
+<input class="search" id="search" placeholder="Search..." />
+
+<!-- CRYPTO -->
+<div class="section active" id="crypto">
+<table id="cryptoTable">
+<tr><th>Coin</th><th>Price (USD)</th><th>24h %</th></tr>
+</table>
 </div>
 
-<!-- Metals Tab -->
-<div id="metals" class="grid tab-content">
-  <div class="chart-box" data-key="gold xau metal">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="silver xag metal">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:SILVER&interval=60&theme=Dark&style=1"></iframe>
-  </div>
+<!-- FOREX -->
+<div class="section" id="forex">
+<table id="forexTable">
+<tr><th>Pair</th><th>Rate</th></tr>
+</table>
 </div>
 
-<!-- Energy Tab -->
-<div id="energy" class="grid tab-content" style="display:none;">
-  <div class="chart-box" data-key="oil wti">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark&style=1"></iframe>
-  </div>
+<!-- MARKETS -->
+<div class="section" id="markets">
+<div class="grid">
+<div class="box">
+<button class="full">⛶</button>
+<iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&theme=Dark"></iframe>
 </div>
-
-<!-- Forex Tab -->
-<div id="forex" class="grid tab-content" style="display:none;">
-  <div class="chart-box" data-key="eur usd forex">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:EURUSD&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="gbp usd forex">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=OANDA:GBPUSD&interval=60&theme=Dark&style=1"></iframe>
-  </div>
+<div class="box">
+<button class="full">⛶</button>
+<iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark"></iframe>
 </div>
-
-<!-- Crypto Tab -->
-<div id="crypto" class="grid tab-content" style="display:none;">
-  <div class="chart-box" data-key="btc bitcoin crypto">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=Dark&style=1"></iframe>
-  </div>
-  <div class="chart-box" data-key="eth ethereum crypto">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:ETHUSDT&interval=60&theme=Dark&style=1"></iframe>
-  </div>
+<div class="box">
+<button class="full">⛶</button>
+<iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark"></iframe>
 </div>
-
-<!-- Indices Tab -->
-<div id="indices" class="grid tab-content" style="display:none;">
-  <div class="chart-box" data-key="sp500 index">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
-
-<!-- Commodities Tab -->
-<div id="commodities" class="grid tab-content" style="display:none;">
-  <div class="chart-box" data-key="coffee commodity">
-    <button class="fullscreen-btn">⛶</button>
-    <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:COFFEE&interval=60&theme=Dark&style=1"></iframe>
-  </div>
 </div>
 
 <script>
-// Tab switching
-document.querySelectorAll(".tab-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    const tab = btn.dataset.tab;
-    document.querySelectorAll(".tab-content").forEach(tc=>{
-      tc.style.display = (tc.id===tab)?"grid":"none";
-    });
-    document.getElementById("searchInput").value="";
-  });
-});
+// Tabs
+document.querySelectorAll(".tab").forEach(b=>{
+b.onclick=()=>{
+document.querySelectorAll(".tab,.section").forEach(x=>x.classList.remove("active"))
+b.classList.add("active")
+document.getElementById(b.dataset.tab).classList.add("active")
+}
+})
 
-// Search filter
-document.getElementById("searchInput").addEventListener("input",function(){
- const val=this.value.toLowerCase();
- document.querySelectorAll(".chart-box").forEach(b=>{
-  b.style.display=b.dataset.key.includes(val)?"block":"none";
- });
-});
+// Fullscreen
+document.querySelectorAll(".full").forEach(b=>{
+b.onclick=()=>{b.parentElement.requestFullscreen()}
+})
 
-// Fullscreen buttons
-document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
-    btn.addEventListener("click", function(){
-        const chartBox = this.parentElement;
-        if(!document.fullscreenElement){
-            chartBox.requestFullscreen().catch(err=>{
-                alert("Fullscreen failed: " + err.message);
-            });
-        } else {
-            document.exitFullscreen();
-        }
-    });
-});
+// CRYPTO LIVE
+async function loadCrypto(){
+let coins=["bitcoin","ethereum","bnb","ripple","cardano","dogecoin","solana","polkadot"]
+let r=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(",")}&vs_currencies=usd&include_24hr_change=true`)
+let d=await r.json()
+let t=document.getElementById("cryptoTable")
+t.innerHTML="<tr><th>Coin</th><th>Price</th><th>24h%</th></tr>"
+for(let c in d){
+t.innerHTML+=`<tr><td>${c}</td><td>$${d[c].usd}</td><td>${d[c].usd_24h_change.toFixed(2)}%</td></tr>`
+}
+}
+loadCrypto()
+setInterval(loadCrypto,30000)
+
+// FOREX LIVE
+async function loadForex(){
+let r=await fetch("https://api.exchangerate.host/latest?base=USD")
+let d=await r.json()
+let pairs=["EUR","GBP","JPY","AUD","CAD","CHF"]
+let t=document.getElementById("forexTable")
+t.innerHTML="<tr><th>Pair</th><th>Rate</th></tr>"
+pairs.forEach(p=>{
+t.innerHTML+=`<tr><td>USD/${p}</td><td>${d.rates[p]}</td></tr>`
+})
+}
+loadForex()
+setInterval(loadForex,60000)
 </script>
 
 </body>
