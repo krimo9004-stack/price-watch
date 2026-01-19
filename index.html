@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Price Watch | Live Markets</title>
+<title>Price Watch | Live Global Markets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
@@ -17,9 +17,9 @@ th,td{padding:10px;border-bottom:1px solid #1e293b;text-align:left}
 th{color:#38bdf8}
 .search{margin:15px auto;display:block;width:300px;padding:10px;border-radius:6px;border:none}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:20px}
-.box{background:#020617;border-radius:14px;height:450px;position:relative}
+.box{background:#020617;border-radius:14px;height:450px;position:relative;overflow:hidden}
 iframe{width:100%;height:100%;border:none}
-.full{position:absolute;top:10px;right:3cm;padding:6px;border:none;border-radius:5px;background:#38bdf8;cursor:pointer}
+.full{position:absolute;top:10px;right:3cm;padding:6px;border:none;border-radius:5px;background:#38bdf8;cursor:pointer;z-index:10}
 </style>
 </head>
 <body>
@@ -32,83 +32,93 @@ iframe{width:100%;height:100%;border:none}
   <button class="tab" data-tab="markets">Markets</button>
 </div>
 
-<input class="search" id="search" placeholder="Search..." />
+<input class="search" id="search" placeholder="Search...">
 
 <!-- CRYPTO -->
 <div class="section active" id="crypto">
-<table id="cryptoTable">
-<tr><th>Coin</th><th>Price (USD)</th><th>24h %</th></tr>
-</table>
+  <table id="cryptoTable">
+    <tr><th>Coin</th><th>Price (USD)</th><th>24h %</th></tr>
+  </table>
 </div>
 
 <!-- FOREX -->
 <div class="section" id="forex">
-<table id="forexTable">
-<tr><th>Pair</th><th>Rate</th></tr>
-</table>
+  <table id="forexTable">
+    <tr><th>Pair</th><th>Rate</th></tr>
+  </table>
 </div>
 
 <!-- MARKETS -->
 <div class="section" id="markets">
-<div class="grid">
-<div class="box">
-<button class="full">⛶</button>
-<iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&theme=Dark"></iframe>
+  <div class="grid">
+    <div class="box">
+      <button class="full">⛶</button>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:GOLD&interval=60&theme=Dark"></iframe>
+    </div>
+    <div class="box">
+      <button class="full">⛶</button>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark"></iframe>
+    </div>
+    <div class="box">
+      <button class="full">⛶</button>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark"></iframe>
+    </div>
+  </div>
 </div>
-<div class="box">
-<button class="full">⛶</button>
-<iframe src="https://s.tradingview.com/widgetembed/?symbol=TVC:USOIL&interval=60&theme=Dark"></iframe>
-</div>
-<div class="box">
-<button class="full">⛶</button>
-<iframe src="https://s.tradingview.com/widgetembed/?symbol=SP:SPX&interval=60&theme=Dark"></iframe>
-</div>
-</div>
-</div>
+
+<!-- Adsterra Popunder -->
+<script src="https://pl28518850.effectivegatecpm.com/8a/e1/00/8ae100f959f39f1b1e274db5a9efd123.js"></script>
 
 <script>
 // Tabs
 document.querySelectorAll(".tab").forEach(b=>{
-b.onclick=()=>{
-document.querySelectorAll(".tab,.section").forEach(x=>x.classList.remove("active"))
-b.classList.add("active")
-document.getElementById(b.dataset.tab).classList.add("active")
-}
-})
+  b.onclick=()=> {
+    document.querySelectorAll(".tab,.section").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById(b.dataset.tab).classList.add("active");
+  }
+});
 
 // Fullscreen
 document.querySelectorAll(".full").forEach(b=>{
-b.onclick=()=>{b.parentElement.requestFullscreen()}
-})
+  b.onclick=()=>{b.parentElement.requestFullscreen();}
+});
 
 // CRYPTO LIVE
 async function loadCrypto(){
-let coins=["bitcoin","ethereum","bnb","ripple","cardano","dogecoin","solana","polkadot"]
-let r=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(",")}&vs_currencies=usd&include_24hr_change=true`)
-let d=await r.json()
-let t=document.getElementById("cryptoTable")
-t.innerHTML="<tr><th>Coin</th><th>Price</th><th>24h%</th></tr>"
-for(let c in d){
-t.innerHTML+=`<tr><td>${c}</td><td>$${d[c].usd}</td><td>${d[c].usd_24h_change.toFixed(2)}%</td></tr>`
+  let coins=["bitcoin","ethereum","bnb","ripple","cardano","dogecoin","solana","polkadot"];
+  let r=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coins.join(",")}&vs_currencies=usd&include_24hr_change=true`);
+  let d=await r.json();
+  let t=document.getElementById("cryptoTable");
+  t.innerHTML="<tr><th>Coin</th><th>Price</th><th>24h%</th></tr>";
+  for(let c in d){
+    t.innerHTML+=`<tr><td>${c}</td><td>$${d[c].usd}</td><td>${d[c].usd_24h_change.toFixed(2)}%</td></tr>`;
+  }
 }
-}
-loadCrypto()
-setInterval(loadCrypto,30000)
+loadCrypto(); setInterval(loadCrypto,30000);
 
 // FOREX LIVE
 async function loadForex(){
-let r=await fetch("https://api.exchangerate.host/latest?base=USD")
-let d=await r.json()
-let pairs=["EUR","GBP","JPY","AUD","CAD","CHF"]
-let t=document.getElementById("forexTable")
-t.innerHTML="<tr><th>Pair</th><th>Rate</th></tr>"
-pairs.forEach(p=>{
-t.innerHTML+=`<tr><td>USD/${p}</td><td>${d.rates[p]}</td></tr>`
-})
+  let r=await fetch("https://api.exchangerate.host/latest?base=USD");
+  let d=await r.json();
+  let pairs=["EUR","GBP","JPY","AUD","CAD","CHF"];
+  let t=document.getElementById("forexTable");
+  t.innerHTML="<tr><th>Pair</th><th>Rate</th></tr>";
+  pairs.forEach(p=>{
+    t.innerHTML+=`<tr><td>USD/${p}</td><td>${d.rates[p]}</td></tr>`;
+  });
 }
-loadForex()
-setInterval(loadForex,60000)
-</script>
+loadForex(); setInterval(loadForex,60000);
 
+// Search
+document.getElementById("search").addEventListener("input", function(){
+  let val=this.value.toLowerCase();
+  document.querySelectorAll("#cryptoTable tr,#forexTable tr").forEach(tr=>{
+    if(tr.querySelector("td")){
+      tr.style.display = Array.from(tr.querySelectorAll("td")).some(td=>td.textContent.toLowerCase().includes(val)) ? "table-row" : "none";
+    }
+  });
+});
+</script>
 </body>
 </html>
